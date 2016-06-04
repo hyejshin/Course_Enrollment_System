@@ -8,7 +8,7 @@ String userPassword = request.getParameter("userPassword");
 Connection myConn = null;
 Statement stmt = null;
 String mySQL = null;
-String dburl = "jdbc:oracle:thin:@localhost:1521:orcl";
+String dburl = "jdbc:oracle:thin:@localhost:1521:oracle";
 String user = "db01";
 String passwd = "ss2";
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
@@ -21,8 +21,8 @@ mySQL = "select s_name from students where s_id='" + userID + "' and s_pwd='"
 ResultSet myResultSet = stmt.executeQuery(mySQL);
 
 if(myResultSet.next() != false){
-	String name = myResultSet.getString("s_name");
-	session.setAttribute("user", name);
+	String urserID = myResultSet.getString("userID");
+	session.setAttribute("user", userID);
 	response.sendRedirect("main.jsp");
 }else{
 	response.sendRedirect("login.jsp");
