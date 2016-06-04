@@ -26,8 +26,8 @@ button { width: 80px; height: 25px; }
 String yearStr = request.getParameter("year");
 String semesterStr = request.getParameter("semester");
 
-String searchType = request.getParameter("searchType");
-String typeValue = request.getParameter("typeValue");
+String searchType = request.getParameter("type");
+String typeValue = request.getParameter("value");
 
 String studentID = "1315842";  //세션 아이디부여
 int year = Integer.parseInt(yearStr);
@@ -51,7 +51,7 @@ mySQL = "select * from enroll where s_id = '" + studentID + "' and e_year = " + 
 ResultSet myResultSet = stmt.executeQuery(mySQL);
 
 %>
-<table><form method="post" action="enroll_page.jsp?searchType=<%=searchType%>&typeValue=<%=typeValue%>">
+<table><form method="post" action="enroll_page.jsp?type=<%=searchType%>&value=<%=typeValue%>">
 	<tr>
 	<td>학년도: <select name="year" id="yearSelect"><option value="2014">2014학년도</option>
 					<option value="2015">2015학년도</option>
@@ -112,18 +112,18 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 </table>
 <table class="margin-top">
 	<form method="post" action="enroll_page.jsp?year=<%=year%>&semester=<%=semester%>" >
-	<tr><td> <input name="typeValue" id="typeValue" size="30"></input>
-		    <select name="searchType" id="searchType"><option value="selectAll">전체</option>
-					<option value="className">과목명</option>
-					<option value="classType">교과구분</option>
-					<option value="professor">교수</option></select> <button>강의검색</button></td></tr>
+	<tr><td> <input name="value" id="typeValue" size="30"></input>
+		    <select name="type" id="searchType">
+	    		<option value="selectAll">전체</option>
+				<option value="className">과목명</option>
+				<option value="classType">교과구분</option>
+				<option value="professor">교수</option></select> <button type="submit">강의검색</button></td></tr>
 	</form>
-</table>
+</table><%= typeValue %><%= searchType %>
 <script>
-	document.getElementById("typeValue").value = <%= typeValue %>;
+	document.getElementById("typeValue").value = <%= searchType %>;
 	document.getElementById("searchType").value = <%= searchType %>;
 </script>
-
 <%
 mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester;
 myResultSet = stmt.executeQuery(mySQL);
