@@ -21,9 +21,8 @@ try {
 } catch(SQLException ex) {
 	System.err.println("SQLException: " + ex.getMessage());
 }
-insert.jsp
-mySQL = "select c_id,c_id_no,c_name,c_unit from course where c_id not in (select c_id
-from enroll where s_id='" + session_id + "')";
+
+mySQL = "select c_id,c_id_no,c_name,c_unit from course where c_id not in (select c_id from enroll where s_id='" + session_id + "')";
 myResultSet = stmt.executeQuery(mySQL);
 if (myResultSet != null) {
 	while (myResultSet.next()) {
@@ -44,4 +43,3 @@ if (myResultSet != null) {
 stmt.close(); myConn.close();
 %>
 </table></body></html>
-<%@ page contentType="text/html
