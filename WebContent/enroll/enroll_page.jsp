@@ -12,20 +12,26 @@ table {
 	margin-left: auto;
 	margin-right: auto;
 }
-.margin-top {
-	margin-top: 20px;
-}
-.text-align-center {
-	text-align: center;
-}
+
+.margin-top {margin-top: 20px; }
+	
+.text-align-center { text-align: center; }
+
+button { width: 80px; height: 25px; }
 </style>
 </head>
 <body>
 <%@ include file="../top.jsp" %>
 <% 
-String studentID = "1315842"; 
-int year = 2016;
-int semester = 1;
+String yearStr = request.getParameter("year");
+String semesterStr = request.getParameter("semester");
+
+String searchType = request.getParameter("searchType");
+String typeValue = request.getParameter("typeValue");
+
+String studentID = "1315842";  //세션 아이디부여
+int year = Integer.parseInt(yearStr);
+int semester = Integer.parseInt(semesterStr);
 
 int totalEnrolledClass = 0;
 int totalEnrolledUnit = 0;
@@ -45,8 +51,20 @@ mySQL = "select * from enroll where s_id = '" + studentID + "' and e_year = " + 
 ResultSet myResultSet = stmt.executeQuery(mySQL);
 
 %>
-<table>
-	<tr><td>수강과목조회</td></tr></table>
+<table><form method="post" action="enroll_page.jsp?searchType=<%=searchType%>&typeValue=<%=typeValue%>">
+	<tr>
+	<td>학년도: <select name="year" id="yearSelect"><option value="2014">2014학년도</option>
+					<option value="2015">2015학년도</option>
+					<option value="2016">2016학년도</option>
+					<option value="2017">2017학년도</option>
+					<option value="2018">2018학년도</option></select></td>
+		<td>학기:	<select name="semester" id="semesterSelect" style="width:80px;"><option value="1">1학기</option>
+							<option value="2">2학기</option></select></td>
+		<td>  <button width="60">검색</button></td><td width="50%"></td></tr></form></table>
+<script>
+	document.getElementById("yearSelect").value = <%= yearStr %>;
+	document.getElementById("semesterSelect").value = <%= semesterStr %>;
+</script>
 <table border= "1" class="text-align-center">
 	<tr><td>과목번호</td><td>과목명</td><td>분반</td><td>교과구분</td><td>학점</td><td>교수</td><td>강의시간</td><td>강의장소</td><td>인원</td><td>수강</td></tr>
 <%
@@ -93,8 +111,18 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 	<tr><td width= "65%"></td><td>총수강과목: <%= totalEnrolledClass %></td><td>총수강학점: <%= totalEnrolledUnit %></td></tr>
 </table>
 <table class="margin-top">
-	<tr><td>검색</td></tr>
+	<form method="post" action="enroll_page.jsp?year=<%=year%>&semester=<%=semester%>" >
+	<tr><td> <input name="typeValue" id="typeValue" size="30"></input>
+		    <select name="searchType" id="searchType"><option value="selectAll">전체</option>
+					<option value="className">과목명</option>
+					<option value="classType">교과구분</option>
+					<option value="professor">교수</option></select> <button>강의검색</button></td></tr>
+	</form>
 </table>
+<script>
+	document.getElementById("typeValue").value = <%= typeValue %>;
+	document.getElementById("searchType").value = <%= searchType %>;
+</script>
 
 <%
 mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester;
