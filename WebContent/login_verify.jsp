@@ -21,7 +21,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 
 if(myResultSet.next() != false){
 	String name = myResultSet.getString("s_name");
-	session.setAttribute("userName", name);
+	session.setAttribute("user", name);
 	session.setAttribute("userID", name);
 	response.sendRedirect("main.jsp");
 }else{
