@@ -1,17 +1,73 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page import="java.sql.*" %>
+<%@page contentType="text/html;charset=EUC-KR"%>
+<%@page import="java.sql.*"%>
 <html>
-<head><title> ¼ö°­½ÅÃ» »ç¿ëÀÚ Á¤º¸ ¼öÁ¤ </title></head>
-<body>
-¡¦..
-<!-- <%
-/*} catch(SQLException ex) {
-String sMessage;
-if (ex.getErrorCode() == 20002) sMessage="¾ÏÈ£´Â 4ÀÚ¸® ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù";
-else if (ex.getErrorCode() == 20003) sMessage="¾ÏÈ£¿¡ °ø¶õÀº ÀÔ·ÂµÇÁö¾Ê½À´Ï´Ù.";
-else sMessage="Àá½Ã ÈÄ ´Ù½Ã ½ÃµµÇÏ½Ê½Ã¿À";*/
+<head>
+<title>ìˆ˜ê°•ì‹ ì²­ ì‚¬ìš©ì ì •ë³´ ìˆ˜ì • í™•ì¸</title></head>
+<%
+         String s_id = request.getParameter("s_id");
+
+         String s_pwd = new String(request.getParameter("s_pwd"));
+         String s_addr = new String(request.getParameter("s_addr").getBytes("Cp1252"), "euc-kr");
+         String s_email = new String(request.getParameter("s_email"));
+         String s_phone = new String(request.getParameter("s_phone"));
+
+         Connection myConn = null;
+         Statement stmt = null;
+         String mySQL = "";
+      
+         String dburl = "";                           //dbì£¼ì†Œ ì…ë ¥í•˜ê¸°
+         String user = "db01";   String passwd = "ss2";
+         String dbdriver = "oracle.jdbc.driver.OracleDriver";
+
+         try{
+ 	Class.forName(dbdriver);
+	myConn = DriverManager.getConnection(dburl, user, passwd);
+	stmt = myConn.createStatement();
+          } 
+          catch(SQLException ex) {
+	System.err.println("SQLException: " + ex.getMessage());
+          }
+ 
+          mySQL = "update student";
+          mySQL = mySQL+ "SET s_pwd = '" + s_pwd +"' , ";
+          mySQL = mySQL + "s_addr = '"+ s_addr + "' , ";
+          mySQL = mySQL + "s_email = '"+ s_email + "' , ";
+          mySQL = mySQL + "s_phone = '"+ s_phone +"' WHERE s_id = '" + s_id + "' "";
+
+          try {
+	stmt.executeQuery(mySQL);
 %>
-¡¦
- -->
+<script>
+   alert("í•™ìƒì •ë³´ê°€ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤." );
+   location.href = "user_update.jsp";
+</script>
+<%
+  }
+  catch(SQLException ex) {
+     	String sMessage;
+	if(ex.getErrorCode() == 20002)
+		sMessage = "ì•”í˜¸ëŠ” 4ìë¦¬ ì´ìƒì´ì–´ì•¼ í•©ë‹ˆë‹¤.";
+	else if(ex.getErrorcode() == 20003)
+		sMessage = "ì•”í˜¸ì— ê³µë€ì€ ì…ë ¥ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
+	else
+		sMessage = "ì ì‹œ í›„ ë‹¤ì‹œ ì‹œë„í•˜ì‹­ì‹œì˜¤" ;
+%>
+<script>
+    alert("<%=sMessage%>" );
+    location.href = "user_update.jsp";
+</script>
+<% } finally {
+	if(stmt != null) {
+	      try { 
+                          stmt.close(); 
+                          myConn.close();
+                      }
+                      catch(SQLException ex) { }
+                }
+         }
+%>
 </body>
 </html>
+
+
+         	
