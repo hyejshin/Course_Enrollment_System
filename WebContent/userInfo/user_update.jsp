@@ -35,7 +35,7 @@
 	String s_phone = myResultSet.getString("s_phone");
 %>
 
-<form method="post" action="update_verify.jsp">
+<form method="post" action="user_update_verify.jsp">
   <input type="hidden" name="s_id" size="30" value="<%=session_id%>">
   <table width="75%" align="center" border="1">
      <tr><th>비밀번호</th>
