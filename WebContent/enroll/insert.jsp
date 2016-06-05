@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*" %>
 <html><head><title>수강신청 입력</title></head>
 <body>
-<%@ include file="top.jsp" %>
+<%@ include file="../top.jsp" %>
 <% if (session_id==null) response.sendRedirect("login.jsp"); %>
 <table width="75%" align="center" border>
 <br>
