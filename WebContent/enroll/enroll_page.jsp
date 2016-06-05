@@ -122,7 +122,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 				<option value="p_name">교수</option></select>
 		    <button>강의검색</button></form></td></tr>
 </table>
-<%=searchType%>
+searchType: <%=searchType%>, typeValue: <%=typeValue%>
 <script>
 	alert(<%=searchType%>); //값이 반영되지 않고 있음
 	document.getElementById("typeValue").value = <%=typeValue%>;
@@ -134,27 +134,17 @@ if(searchType.equals("selectAll")){
 			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
 }else if(searchType.equals("p_name")){
 	typeValue = "창병모"; // typeValue가 반영되게 해야함
-	Statement stmt2 = myConn.createStatement();
-	String mySQL2 = "select p_id from professor where p_name = '" + typeValue + "'";
-	ResultSet myResultSet2 = stmt2.executeQuery(mySQL2);
-	myResultSet2.next();
-	String p_id =  myResultSet2.getString("p_id");
-	
-	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + " and p_id = '" + p_id 
-			+ "' and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
+	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + 
+			" and p_id in (select p_id from professor where p_name = '" + typeValue + "')" 
+			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
 } else if(searchType.equals("c_id")){
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + " and c_id = '" + typeValue
 			+ "' and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
 }else if(searchType.equals("c_name")){
-	typeValue = "임베디드"; // typeValue가 반영되게 해야함
-	Statement stmt2 = myConn.createStatement();
-	String mySQL2 = "select c_id from course where c_name = '" + typeValue + "'";
-	ResultSet myResultSet2 = stmt2.executeQuery(mySQL2);
-	myResultSet2.next();
-	String c_id =  myResultSet2.getString("c_id");
-	
-	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + " and c_id = '" + c_id 
-			+ "' and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
+	typeValue = "임베디드"; // typeValue가 반영되게 해야함	
+	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + 
+			" and c_id in (select c_id from course where c_name = '" + typeValue + "')" 
+			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
 }else if(searchType.equals("c_major")){
 	typeValue = "전공"; //typeValue가 반영되게 해야함
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + 
