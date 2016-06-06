@@ -1,29 +1,30 @@
-CREATE OR REPLACE TRIGGER BeforeUpdateStudent
-	BEFORE UPDATE ON student
-	FOR EACH ROW
-
-	DECLARE
-	underflow_length EXCEPTION;
+CREATE OR REPLACE TRIGGER BeforeUpdateStudent BEFORE
+UPDATE ON student
+ FOR EACH ROW
+ DECLARE
+ 	underflow_length EXCEPTION;
 	invalid_value EXCEPTION;
 	nLength NUMBER;
 	nBlank NUMBER;
-	
-	BEGIN
-	nLength := LENGTH(:new.s_pwd);
-	IF nLength < 4 THEN
-	DBMS_OUTPUT.PUT_LINE('╬охё╢б 4юз╦╝ юл╩Сюл╬Н╬ъ гу╢о╢ы.');
-	RAISE underflow_length;
-	END IF;
-		nBlank := INSTR(:new.s_pwd, ' ', 1, 1);
-		IF nBlank != 0 THEN
-		DBMS_OUTPUT.PUT_LINE('╬охё©║ ╟Ь╤Ую╨ ют╥б╣гаЖ ╬й╫ю╢о╢ы.');
+BEGIN
+/* М∙≥К┘└ Л═°Л∙╫Л║╟Й╠╢ : DDLЛ≈░Л└° М∙╢Й╡╟ */
+/* КЁ╢К▀╓ КЁ╣Л·║М∙° Л═°Л∙╫Л║╟Й╠╢Л²└ К▀╓Кё╗Й╦╟ М▌╦М∙≤Й╡▄ М∙╗ */
+/* Л∙■М≤╦ Л═°Л∙╫Л║╟Й╠╢ : 4Л·░К╕╛ Л²╢Л┐│, blankК┼■ М≈┬Л ╘Л∙┬М∙╗ */
+	SELECT length(:new.s_pwd), instr(:new.s_pwd,' ')
+	INTO nLength, nBlank
+	FROM DUAL;
+
+	IF (nLength < 4) THEN
+		RAISE underflow_length;
+	ELSIF (nBlank > 0) THEN
 		RAISE invalid_value;
 	END IF;
-	
-	EXCEPTION
+EXCEPTION
 	WHEN underflow_length THEN
-		RAISE_APPLICATION_ERROR(-20002, '╬охё╢б 4юз╦╝ юл╩Сюл╬Н╬ъ гу╢о╢ы.');
+	RAISE_APPLICATION_ERROR
+	(-20002, 'Л∙■М≤╦К┼■ 4Л·░К╕╛ Л²╢Л┐│Л²╢Л√╢Л∙╪ М∙╘К▀┬К▀╓');
 	WHEN invalid_value THEN
-		RAISE_APPLICATION_ERROR(-20003, '╬охё©║ ╟Ь╤Ую╨ ют╥б╣гаЖ ╬й╫ю╢о╢ы.');
+	RAISE_APPLICATION_ERROR
+	(-20003, 'Л∙■М≤╦Л≈░ ЙЁ╣К·─Л²─ Л·┘К═╔К░≤Л╖─ Л∙┼Л┼╣К▀┬К▀╓.');
 END;
 /
