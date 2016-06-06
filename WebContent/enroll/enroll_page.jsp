@@ -8,7 +8,7 @@
 <title>수강신청</title>
 <style>
 table {
-	width: 90%;
+	width: 850px;
 	margin-left: auto;
 	margin-right: auto;
 }
