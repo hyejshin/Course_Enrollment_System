@@ -25,9 +25,8 @@ button { width: 80px; height: 25px; }
 <% 
 String yearStr = request.getParameter("year");
 String semesterStr = request.getParameter("semester");
-
 String searchType = request.getParameter("type");
-String typeValue = request.getParameter("value");
+String typeValue = new String(request.getParameter("value").getBytes("8859_1"), "EUC-KR");
 
 String studentID = "1315842";  //세션 아이디부여
 int year = Integer.parseInt(yearStr);
@@ -51,7 +50,7 @@ mySQL = "select * from enroll where s_id = '" + studentID + "' and e_year = " + 
 ResultSet myResultSet = stmt.executeQuery(mySQL);
 
 %>
-<table><form method="post" action="enroll_page.jsp?type=<%=searchType%>&value=<%=typeValue%>">
+<table><form method="post" id="year_semester" action="enroll_page.jsp?type=<%=searchType%>&value=<%=typeValue%>">
 	<tr>
 	<td>학년도: <select name="year" id="yearSelect"><option value="2014">2014학년도</option>
 					<option value="2015">2015학년도</option>
@@ -112,28 +111,25 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 </table>
 <table class="margin-top">
 	<tr><td>
-	<form method="post" action="enroll_page.jsp?year=<%=year%>&semester=<%=semester%>" >
-	 <input name="value" id="typeValue" size="30">
-	 		<select name="type" id="searchType">
+	<form method="post" id="search" action="enroll_page.jsp?year=<%=year%>&semester=<%=semester%>" >
+	 <input name="value" id="valueInput" size="30">
+	 		<select name="type" id="typeSelect">
 	 			<option value="selectAll">전체</option>
-	 			<option value="c_id">과목번호</option>
 				<option value="c_name">과목명</option>
-				<option value="c_major">교과구분</option>
-				<option value="p_name">교수</option></select>
+				<option value="p_name">교수</option>
+				<option value="c_id">과목번호</option>
+				<option value="c_major">교과구분</option></select>
 		    <button>강의검색</button></form></td></tr>
 </table>
-searchType: <%=searchType%>, typeValue: <%=typeValue%>
 <script>
-	alert(<%=searchType%>); //값이 반영되지 않고 있음
-	document.getElementById("typeValue").value = <%=typeValue%>;
-	document.getElementById("searchType").value = <%=searchType%>;
+	document.getElementById("valueInput").value = "<%=typeValue%>";
+	document.getElementById("typeSelect").value = "<%=searchType%>";
 </script>
 <%
 if(searchType.equals("selectAll")){
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester
 			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
 }else if(searchType.equals("p_name")){
-	typeValue = "창병모"; // typeValue가 반영되게 해야함
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + 
 			" and p_id in (select p_id from professor where p_name = '" + typeValue + "')" 
 			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
@@ -141,12 +137,10 @@ if(searchType.equals("selectAll")){
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + " and c_id = '" + typeValue
 			+ "' and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
 }else if(searchType.equals("c_name")){
-	typeValue = "임베디드"; // typeValue가 반영되게 해야함	
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + 
 			" and c_id in (select c_id from course where c_name = '" + typeValue + "')" 
 			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
 }else if(searchType.equals("c_major")){
-	typeValue = "전공"; //typeValue가 반영되게 해야함
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + 
 			" and c_id in (select c_id from course where c_major = '" + typeValue + "')" 
 			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
