@@ -12,9 +12,12 @@ table {
 	margin-left: auto;
 	margin-right: auto;
 }
-#day{width: 620px;}
-.margin-top {margin-top: 20px; }
-.text-align-center { text-align: center; }
+.table_style1{
+	width: 620px;
+	margin-top: 20px;
+	text-align: center;
+}
+
 
 button { width: 80px; height: 25px; }
 
@@ -71,7 +74,7 @@ int semester = Integer.parseInt(semesterStr);
 int totalEnrolledClass = 0;
 int totalEnrolledUnit = 0;
 
-String color[] = {"#58D3F7", "#AFF17F", "#FAAC58", "#F3F781", "#F78181", "#D0FA58", "#A9BCF5"};
+String color[] = {"#58D3F7", "#AFF17F", "#FAAC58", "#F3F781", "#F78181", "#A9BCF5", "#5DADE2", "#BB8FCE"};
 
 Connection myConn = null;
 Statement stmt = null;
@@ -88,8 +91,8 @@ mySQL = "select * from enroll where s_id = '" + studentID + "' and e_year = " + 
 ResultSet myResultSet = stmt.executeQuery(mySQL);
 
 %>
-<table align="center" class="margin-top">
-	<tr><td width="25%"></td><td><form method="post" action="student_time_table.jsp">
+<table align="center" class="table_style1">
+	<tr><td><form method="post" action="student_time_table.jsp">
 	학년도: <select name="year" id="yearSelect"><option value="2014">2014학년도</option>
 					<option value="2015">2015학년도</option>
 					<option value="2016">2016학년도</option>
@@ -97,12 +100,12 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 					<option value="2018">2018학년도</option></select>
 		학기:	<select name="semester" id="semesterSelect" style="width:80px;"><option value="1">1학기</option>
 							<option value="2">2학기</option></select>
-		  <button>검색</button></form></td><td></td></tr></table>
+		  <button>검색</button></form></td></tr></table>
 <script>
 	document.getElementById("yearSelect").value = <%= yearStr %>;
 	document.getElementById("semesterSelect").value = <%= semesterStr %>;
 </script>
-<table border= "1" id="day" class="text-align-center, margin-top">
+<table border= "1" class="table_style1">
 	<tr><td width="20px"></td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td></tr>
 </table>
 <div class="schedule">
@@ -153,7 +156,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		for(int i=0; i<len; i+=2){
 			int dayPos = 20 + 120*getDayValue(t_day.substring(i, i+1));
 			%><div class="course" style="top:<%=startPos%>px; left:<%=dayPos%>px; height:<%=height%>px; 
-			background-color:<%=color[totalEnrolledClass%7]%>">
+			background-color:<%=color[totalEnrolledClass%8]%>">
 				</br><%=c_name%></br><%=p_name%></br><%=t_room%></br><%=t_time%>
 			</div><%
 		}
