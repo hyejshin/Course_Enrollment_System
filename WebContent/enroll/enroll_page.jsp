@@ -103,7 +103,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		
 		<tr><td><%=c_id%></td><td><%=c_name%></td><td><%=c_id_no%></td><td><%=c_major%></td><td><%=c_unit%></td>
 		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td><td><%= studentNum %>/<%= t_max %></td>
-		<td><a href="./delete_class.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">수강취소</a></td></tr>
+		<td><a href="./delete.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">수강취소</a></td></tr>
 <%}
 %> 
 </table>
@@ -113,14 +113,14 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 <table class="margin-top">
 	<tr><td>
 	<form method="post" id="search" action="enroll_page.jsp?year=<%=year%>&semester=<%=semester%>" >
-	 <input name="value" id="valueInput" size="30">
-	 		<select name="type" id="typeSelect">
-	 			<option value="selectAll">전체</option>
-				<option value="c_name">과목명</option>
-				<option value="p_name">교수</option>
-				<option value="c_id">과목번호</option>
-				<option value="c_major">교과구분</option></select>
-		    <button>강의검색</button></form></td></tr>
+ 		<select name="type" id="typeSelect">
+ 			<option value="selectAll">전체</option>
+			<option value="c_name">과목명</option>
+			<option value="p_name">교수</option>
+			<option value="c_id">과목번호</option>
+			<option value="c_major">교과구분</option></select>
+		<input name="value" id="valueInput" size="30">
+	    <button>강의검색</button></form></td></tr>
 </table>
 <script>
 	document.getElementById("valueInput").value = "<%=typeValue%>";
@@ -180,7 +180,7 @@ myResultSet = stmt.executeQuery(mySQL);
 		
 		<tr><td><%=c_id%></td><td><%=c_name%></td><td><%=c_id_no%></td><td><%=c_major%></td><td><%=c_unit%></td>
 		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td><td><%= studentNum %>/<%= t_max %></td>
-		<td><a href="./enroll_class.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">수강신청</a></td></tr>
+		<td><a href="./insert.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">수강신청</a></td></tr>
 <%}
 %> 
 </table>

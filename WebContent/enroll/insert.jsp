@@ -1,45 +1,57 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page import="java.sql.*" %>
-<html><head><title>수강신청 입력</title></head>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%><%@ page import="java.sql.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>수강신청</title>
+</head>
 <body>
-<%@ include file="../top.jsp" %>
-<% if (session_id==null) response.sendRedirect("login.jsp"); %>
-<table width="75%" align="center" border>
-<br>
-<tr><th>과목번호</th><th>분반</th><th>과목명</th><th>학점</th>
-<th>수강신청</th></tr>
-<%
-Connection myConn = null; Statement stmt = null;
-ResultSet myResultSet = null; String mySQL = "";
-String dburl = "jdbc:oracle:thin:@db.sd.ac.kr:1521:ora9";
-String user="db"; String passwd="db";
-String dbdriver = "oracle.jdbc.driver.OracleDriver";
-try {
-	Class.forName(dbdriver);
-	myConn = DriverManager.getConnection (dburl, user, passwd);
-	stmt = myConn.createStatement();
-} catch(SQLException ex) {
-	System.err.println("SQLException: " + ex.getMessage());
-}
+<% 
+String yearStr = request.getParameter("year");
+String semesterStr = request.getParameter("semester");
+String c_id = request.getParameter("c_id");
+int c_id_no = Integer.parseInt(request.getParameter("c_id_no"));
 
-mySQL = "select c_id,c_id_no,c_name,c_unit from course where c_id not in (select c_id from enroll where s_id='" + session_id + "')";
-myResultSet = stmt.executeQuery(mySQL);
-if (myResultSet != null) {
-	while (myResultSet.next()) {
-		String c_id = myResultSet.getString("c_id");
-		int c_id_no = myResultSet.getInt("c_id_no");
-		String c_name = myResultSet.getString("c_name");
-		int c_unit = myResultSet.getInt("c_unit");
-		%>
-		<tr>
-		<td align="center"><%= c_id %></td> <td align="center"><%= c_id_no %></td>
-		<td align="center"><%= c_name %></td><td align="center"><%= c_unit %></td>
-		<td align="center"><a href="insert_verify.jsp?c_id=<%= c_id %>&c_id_no=<%=
-		c_id_no %>">신청</a></td>
-		</tr>
-		<%
-	}
-}
-stmt.close(); myConn.close();
+int year = Integer.parseInt(yearStr);
+int semester = Integer.parseInt(semesterStr);
+String s_id = "1315842";
+String result = null;
+
+Connection myConn = null;
+Statement stmt = null;
+String mySQL = null;
+String dburl = "jdbc:oracle:thin:@localhost:1521:orcl";
+String user = "db01";
+String passwd = "ss2";
+String dbdriver = "oracle.jdbc.driver.OracleDriver";
+Class.forName(dbdriver);
+myConn = DriverManager.getConnection(dburl, user, passwd);
+
+/*stmt = myConn.createStatement();
+mySQL = "INSERT INTO enroll(s_id, c_id, c_id_no, e_year, e_semester) VALUES ('"+s_id+"', '"+c_id+"', '"+c_id_no+"', "+year+", "+semester+")";
+ResultSet myResultSet = stmt.executeQuery(mySQL);*/
+
+CallableStatement cstmt = myConn.prepareCall("{call InsertEnroll(?,?,?,?)}"); 
+cstmt.setString(1, s_id); 
+cstmt.setString(2, c_id); 
+cstmt.setInt(3, c_id_no);
+cstmt.registerOutParameter(4, java.sql.Types.VARCHAR); 
+try  {  
+	cstmt.execute(); 
+	result = cstmt.getString(4);
 %>
-</table></body></html>
+<script>
+	alert("<%= result %>"); 
+	location.href="./enroll_page.jsp?year="+<%=year%>+"&semester="+<%=semester%>+"&type=selectAll&value=";
+</script>
+<%
+} catch(SQLException ex) { 
+	System.err.println("SQLException: " + ex.getMessage()); 
+} finally { 
+	if (cstmt != null) 
+		try { myConn.commit(); cstmt.close(); myConn.close(); 
+		} catch(SQLException ex) { } 
+} %>
+</body>
+</html>

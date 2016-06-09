@@ -1,7 +1,5 @@
 CREATE OR REPLACE PROCEDURE InsertEnroll(sStudentId IN VARCHAR2,
-	sCourseId IN VARCHAR2,
-	nCourseIdNo IN NUMBER,
-	result OUT VARCHAR2)
+	sCourseId IN VARCHAR2, nCourseIdNo IN NUMBER, result OUT VARCHAR2)
 IS
 	too_many_sumCourseUnit EXCEPTION;
 	duplicate_courses EXCEPTION;
@@ -18,11 +16,10 @@ BEGIN
 	DBMS_OUTPUT.put_line('#');
 	DBMS_OUTPUT.put_line(sStudentId || '님이 과목번호 ' || sCourseId ||
 	', 분반 ' || TO_CHAR(nCourseIdNo) || '의 수강 등록을 요청하였습니다.');
-
+	
 	/* 년도, 학기 알아내기 */
 	nYear := Date2EnrollYear(SYSDATE);
 	nSemester := Date2EnrollSemester(SYSDATE);
-
 
 	/* 에러 처리 1 : 최대학점 초과여부 */
 	SELECT SUM(c.c_unit)
@@ -71,12 +68,12 @@ BEGIN
 	INTO nCnt
 	FROM
 	(
-	SELECT t_time
+	SELECT t_day, t_time
 	FROM teach
 	WHERE t_year=nYear and t_semester = nSemester and
 	c_id = sCourseId and c_id_no = nCourseIdNo
 	INTERSECT
-	SELECT t.t_time
+	SELECT t_day, t.t_time
 	FROM teach t, enroll e
 	WHERE e.s_id=sStudentId and e.e_year=nYear and e.e_semester = nSemester
 	and t.t_year=nYear and t.t_semester = nSemester and	e.c_id=t.c_id and e.c_id_no=t.c_id_no);
@@ -84,8 +81,8 @@ BEGIN
 		RAISE duplicate_time;
 	END IF;
 	
-	/* 수강 신청 등록 */
-	INSERT INTO enroll(S_ID,C_ID,C_ID_NO,E_YEAR,E_SEMESTER)
+	/* 수강 신청 등록 */	
+	INSERT INTO enroll(s_id, c_id, c_id_no, e_year, e_semester) 
 	VALUES (sStudentId, sCourseId, nCourseIdNo, nYear, nSemester);
 	COMMIT;
 	result := '수강신청 등록이 완료되었습니다.';
