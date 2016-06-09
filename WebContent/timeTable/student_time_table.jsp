@@ -8,7 +8,7 @@
 <title>시간표</title>
 <style>
 table {
-	width: 850px;
+	width: 750px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -20,21 +20,24 @@ button { width: 80px; height: 25px; }
 
 div{
 	border: 1px solid;
+	text-align: center;
 }
 .schedule {
 	position: relative; 
 	width: 620px; 
-	height: 700px;
 	margin-left: auto;
 	margin-right: auto;
+	border-color: #D8D8D8;
 }
 .time{
 	width:20px;
 	height:80px;
+	border-color: #D8D8D8;
 }
 .course{
 	width: 120px;
 	position: absolute;
+	border-color: #D8D8D8;
 }
 </style>
 </head>
@@ -68,6 +71,8 @@ int semester = Integer.parseInt(semesterStr);
 int totalEnrolledClass = 0;
 int totalEnrolledUnit = 0;
 
+String color[] = {"#58D3F7", "#AFF17F", "#FAAC58", "#F3F781", "#F78181", "#D0FA58", "#A9BCF5"};
+
 Connection myConn = null;
 Statement stmt = null;
 String mySQL = null;
@@ -83,16 +88,16 @@ mySQL = "select * from enroll where s_id = '" + studentID + "' and e_year = " + 
 ResultSet myResultSet = stmt.executeQuery(mySQL);
 
 %>
-<table><form method="post" action="student_time_table.jsp">
-	<tr>
-	<td>학년도: <select name="year" id="yearSelect"><option value="2014">2014학년도</option>
+<table align="center" class="margin-top">
+	<tr><td width="25%"></td><td><form method="post" action="student_time_table.jsp">
+	학년도: <select name="year" id="yearSelect"><option value="2014">2014학년도</option>
 					<option value="2015">2015학년도</option>
 					<option value="2016">2016학년도</option>
 					<option value="2017">2017학년도</option>
-					<option value="2018">2018학년도</option></select></td>
-		<td>학기:	<select name="semester" id="semesterSelect" style="width:80px;"><option value="1">1학기</option>
-							<option value="2">2학기</option></select></td>
-		<td>  <button>검색</button></td><td width="50%"></td></tr></form></table>
+					<option value="2018">2018학년도</option></select>
+		학기:	<select name="semester" id="semesterSelect" style="width:80px;"><option value="1">1학기</option>
+							<option value="2">2학기</option></select>
+		  <button>검색</button></form></td><td></td></tr></table>
 <script>
 	document.getElementById("yearSelect").value = <%= yearStr %>;
 	document.getElementById("semesterSelect").value = <%= semesterStr %>;
@@ -102,11 +107,8 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 </table>
 <div class="schedule">
 <%
+	int endHr = 14;
 	int y = 0;
-	for(int i=9; i<=20; i++){%>
-		<div class="time" style="top:<%=y%>; left:0;"><%=i%></div><%
-		y += 80;
-	}
 	while(myResultSet.next() != false){
 		String c_id = myResultSet.getString("c_id");
 		String c_id_no = myResultSet.getString("c_id_no");
@@ -131,6 +133,8 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		int startTime = hr*4+min/15;
 		hr = Integer.parseInt(t_time.substring(6, 8));
 		min = Integer.parseInt(t_time.substring(9, 11));
+		if(endHr < hr)
+			endHr = hr;
 		int endTime = hr*4+min/15;
 		int startPos = (startTime - 36)*20;
 		int height = (endTime - startTime)*20;
@@ -140,9 +144,6 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		myResultSet2.next();
 		String p_name =  myResultSet2.getString("p_name");
 		
-		totalEnrolledClass += 1;
-		totalEnrolledUnit += c_unit;
-		
 		mySQL2 = "select COUNT(*) from enroll where c_id = '" + c_id + "' and c_id_no = '" + c_id_no + "' and e_year = " + year + " and e_semester = " + semester;
 		myResultSet2 = stmt2.executeQuery(mySQL2);
 		myResultSet2.next();
@@ -151,10 +152,17 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		int len = t_day.length();
 		for(int i=0; i<len; i+=2){
 			int dayPos = 20 + 120*getDayValue(t_day.substring(i, i+1));
-			%><div class="course" style="top:<%=startPos%>px; left:<%=dayPos%>px; height:<%=height%>px">
-				<%=c_name%></br><%=p_name%></br><%=t_room%></br><%=t_time%>
+			%><div class="course" style="top:<%=startPos%>px; left:<%=dayPos%>px; height:<%=height%>px; 
+			background-color:<%=color[totalEnrolledClass%7]%>">
+				</br><%=c_name%></br><%=p_name%></br><%=t_room%></br><%=t_time%>
 			</div><%
 		}
+		totalEnrolledClass += 1;
+		totalEnrolledUnit += c_unit;
+	}
+	for(int i=9; i<=endHr; i++){%>
+	<div class="time" style="top:<%=y%>; left:0;"><%=i%></div><%
+	y += 80;
 }
 %> 
 </div>
