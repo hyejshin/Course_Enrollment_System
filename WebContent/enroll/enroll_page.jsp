@@ -102,7 +102,8 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		int studentNum = myResultSet2.getInt(1);%>
 		
 		<tr><td><%=c_id%></td><td><%=c_name%></td><td><%=c_id_no%></td><td><%=c_major%></td><td><%=c_unit%></td>
-		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td><td><%= studentNum %>/<%= t_max %></td><td>수강취소</td></tr>
+		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td><td><%= studentNum %>/<%= t_max %></td>
+		<td><a href="./delete_class.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">수강취소</a></td></tr>
 <%}
 %> 
 </table>
@@ -178,7 +179,8 @@ myResultSet = stmt.executeQuery(mySQL);
 		int studentNum = myResultSet2.getInt(1);%>
 		
 		<tr><td><%=c_id%></td><td><%=c_name%></td><td><%=c_id_no%></td><td><%=c_major%></td><td><%=c_unit%></td>
-		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td><td><%= studentNum %>/<%= t_max %></td><td>수강신청</td></tr>
+		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td><td><%= studentNum %>/<%= t_max %></td>
+		<td><a href="./enroll_class.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">수강신청</a></td></tr>
 <%}
 %> 
 </table>

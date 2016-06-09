@@ -47,7 +47,7 @@ BEGIN
 	FROM enroll
 	WHERE s_id = sStudentId and c_id = sCourseId;
 	IF (nCnt > 0) THEN
-		RAISE too_many_courses;
+		RAISE duplicate_courses;
 	END IF;
 		
 	/* 에러 처리 3 : 수강신청 인원 초과 여부 */
