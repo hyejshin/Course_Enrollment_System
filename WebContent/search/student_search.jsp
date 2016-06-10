@@ -45,7 +45,7 @@ String value = new String(request.getParameter("value").getBytes("8859_1"), "EUC
  			<option value="selectAll">전체</option>
 			<option value="s_name">학생이름</option>
 			<option value="s_major">학과</option>
-			<option value="myClass">내수업수강학생</option></select>
+			<option value="s_grade">학년</option></select>
 		<input name="value" id="valueInput" size="30">
 	    <button>학생검색</button></form></td></tr>
 </table>
@@ -56,11 +56,11 @@ String value = new String(request.getParameter("value").getBytes("8859_1"), "EUC
 <%
 mySQL = "select * from student";
 if(searchType.equals("s_name")) {
-	mySQL = "select * from student where s_name = '" + value + "'";
+	mySQL = "select * from student where s_name LIKE '%" + value + "%'";
 } else if(searchType.equals("s_major")){
-	mySQL = "select * from student where s_major = '" + value + "'";
-} else if(searchType.equals("myClass")){
-	
+	mySQL = "select * from student where s_major LIKE '%" + value + "%'";
+} else if(searchType.equals("s_grade")){
+	mySQL = "select * from student where s_grade = '" + value + "'";
 }
 ResultSet myResultSet = stmt.executeQuery(mySQL);
 %>

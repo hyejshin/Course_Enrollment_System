@@ -55,9 +55,9 @@ String value = new String(request.getParameter("value").getBytes("8859_1"), "EUC
 <%
 mySQL = "select * from professor";
 if(searchType.equals("p_name")) {
-	mySQL = "select * from professor where p_name = '" + value + "'";
+	mySQL = "select * from professor where p_name LIKE '%" + value + "%'";
 } else if(searchType.equals("p_major")){
-	mySQL = "select * from professor where p_major = '" + value + "'";
+	mySQL = "select * from professor where p_major LIKE '%" + value + "%'";
 }
 ResultSet myResultSet = stmt.executeQuery(mySQL);
 %>

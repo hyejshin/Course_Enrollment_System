@@ -147,11 +147,11 @@ if(searchType.equals("selectAll")){
 			+ "' and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
 }else if(searchType.equals("c_name")){
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + 
-			" and c_id in (select c_id from course where c_name = '" + typeValue + "')" 
+			" and c_id in (select c_id from course where c_name LIKE '%" + typeValue + "%')" 
 			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
 }else if(searchType.equals("c_major")){
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + 
-			" and c_id in (select c_id from course where c_major = '" + typeValue + "')" 
+			" and c_id in (select c_id from course where c_major LIKE '%" + typeValue + "%')" 
 			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
 }
 myResultSet = stmt.executeQuery(mySQL);
