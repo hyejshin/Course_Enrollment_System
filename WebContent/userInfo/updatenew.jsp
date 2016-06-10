@@ -6,7 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>학생 정보 수정</title>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/earlyaccess/hanna.css">
+
 <style>
+body{
+	font-family: 'Hanna';
+}
 
 </style>
 </head>
@@ -15,7 +20,7 @@
 <%
 //if(session_id == null)
 	//response.sendRedirect("login.jsp");
-String professorID = "cs4580";  //세션 아이디부여
+String studentID = "1315842";  //세션 아이디부여
 
 Connection myConn = null;
 Statement stmt = null;
@@ -28,74 +33,69 @@ Class.forName(dbdriver);
 myConn = DriverManager.getConnection(dburl, user, passwd);
 stmt = myConn.createStatement();
 
-mySQL = "select * from professor where p_id='" + professorID + "'";;
+mySQL = "select * from student where s_id = '" + studentID + "'";;
 ResultSet myResultSet = stmt.executeQuery(mySQL);
 
 %>
-<form method="post" action="professor_update_verify.jsp">
+<table >
+<tr> 
+      <td colspan="2" height="39" align="center">
+         
+    </tr>
+    </table>
+<form method="post" action="user_update_verify.jsp">
   <table width="600" border="1" cellspacing="0" cellpadding="3"  align="center">
     <tr> 
       <td colspan="2" height="39" align="center">
-         <font size="+1" ><b>교수 정보 수정</b></font></td>
-    </tr>
-    <tr>
-      <td colspan="2" align="center">교수 정보 수정 화면입니다:)</td>
+         <font size="+1" ><b>학&nbsp; 생 정보 수정</b></font></td>
     </tr>
      <tr> 
-      <td width="200" align="center"><b>아이디 확인</b></td>
+      <td width="200" align="center"><b>아이디 확인 정보</b></td>
       <td width="400">&nbsp;</td>
     </tr>  
     <tr> 
       <td  width="200" align="center"> 사용자 ID </td>
-      <td  width="400"><%=professorID%><sup><font size="2" color="red">&nbsp; *아이디는 교번으로 수정불가</font></sup></td>
+      <td  width="400"><%=studentID%><sup><font size="2" color="red">&nbsp; *사용자 아이디는 학번으로 수정불가</font></sup></td>
     </tr>
 
 	<%
 	while(myResultSet.next() != false){ 
-		String p_id = myResultSet.getString("p_id"); 
-		String p_pwd = myResultSet.getString("p_pwd");
-		String p_name = myResultSet.getString("p_name");
-		String p_major = myResultSet.getString("p_major");
-		String p_college = myResultSet.getString("p_college");
-		String p_room = myResultSet.getString("p_room");
-		String p_email = myResultSet.getString("p_email");
-		%>
+		String s_id = myResultSet.getString("s_id"); 
+		String s_pwd = myResultSet.getString("s_pwd");
+		String s_name = myResultSet.getString("s_name");
+		String s_addr = myResultSet.getString("s_addr");
+		String s_email = myResultSet.getString("s_email");
+		String s_phone = myResultSet.getString("s_phone");%>
 		
 		<tr>
-					<td width="200" align="center">이 &nbsp; 름</td>
-					<td width="400"><input type="text" name="p_name" size="15"
-						value="<%=p_name%>"></td>
+					<td width="200" align="center"> 이&nbsp;름</td>
+					<td width="400"><input type="text" name="s_name" size="15"
+						value="<%=s_name%>"></td>
 		</tr>
 		     <tr> 
       <td width="200" align="center"> 비밀번호</td>
-      <td width="400"><input type="password" name="p_pwd"
-						size="15" value="<%=p_pwd%>"></td>
+      <td width="400"><input type="password" name="s_pwd"
+						size="15" value="<%=s_pwd%>"></td>
 				</tr>
 <tr> 
       <td width="200" align="center"><b>개인정보</b></td>
       <td width="400">&nbsp;</td>
     </tr>  
-    <tr>
-				<td width="200" align="center">대학 &nbsp;정보</td>
-				<td width="400"><input type="text" name="p_college" size="50"
-					value="<%=p_college%>"></td>
-			</tr>
 			<tr>
-				<td width="200" align="center">전 &nbsp; 공</td>
-				<td width="400"><input type="text" name="p_major" size="50"
-					value="<%=p_major%>"></td>
-			</tr>
-			<tr>
-				<td width="200" align="center">연&nbsp; 구&nbsp; 실</td>
-				<td width="400"><input type="text" name="p_room" size="50"
-					value="<%=p_room%>"></td>
+				<td width="200" align="center">주소</td>
+				<td width="400"><input type="text" name="s_addr" size="50"
+					value="<%=s_addr%>"></td>
 			</tr>
 			<tr>
 				<td width="200" align="center">E-mail</td>
-				<td width="400"><input type="text" name="p_email" size="50"
-					value="<%=p_email%>"></td>
+				<td width="400"><input type="text" name="s_email" size="50"
+					value="<%=s_email%>"></td>
 			</tr>
-			
+			<tr>
+				<td width="200" align="center">연락처</td>
+				<td width="400"><input type="text" name="s_phone" size="50"
+					value="<%=s_phone%>"></td>
+			</tr>
 <%}
 %> 
 			<tr> 
