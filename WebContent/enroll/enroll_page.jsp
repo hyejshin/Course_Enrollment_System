@@ -26,6 +26,15 @@ String semesterStr = request.getParameter("semester");
 String searchType = request.getParameter("type");
 String typeValue = new String(request.getParameter("value").getBytes("8859_1"), "EUC-KR");
 String studentID = "1315842";  //세션 아이디부여
+
+String validEnroll = "";
+String validCancel = "";
+
+if(validYear.equals(yearStr) && validSemester.equals(semesterStr)){
+	validEnroll = "수강신청";
+	validCancel = "수강취소";
+}
+
 int year = Integer.parseInt(yearStr);
 int semester = Integer.parseInt(semesterStr);
 int totalEnrolledClass = 0;
@@ -102,7 +111,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		
 		<tr><td><%=c_id%></td><td><%=c_name%></td><td><%=c_id_no%></td><td><%=c_major%></td><td><%=c_unit%></td>
 		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td><td><%= studentNum %>/<%= t_max %></td>
-		<td><a href="./delete.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">수강취소</a></td></tr>
+		<td><a href="./delete.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>"><%=validCancel%></a></td></tr>
 <%}
 %> 
 </table>
@@ -179,7 +188,7 @@ myResultSet = stmt.executeQuery(mySQL);
 		
 		<tr><td><%=c_id%></td><td><%=c_name%></td><td><%=c_id_no%></td><td><%=c_major%></td><td><%=c_unit%></td>
 		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td><td><%= studentNum %>/<%= t_max %></td>
-		<td><a href="./insert.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">수강신청</a></td></tr>
+		<td><a href="./insert.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>"><%=validEnroll%></a></td></tr>
 <%}
 %> 
 </table>

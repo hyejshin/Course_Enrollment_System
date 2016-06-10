@@ -21,7 +21,7 @@ button { width: 80px; height: 25px; }
 </style>
 </head>
 <body>
-<%@ include file="../top.jsp" %>
+<%@ include file="../top_prof.jsp" %>
 <%
 Connection myConn = null;
 Statement stmt = null;

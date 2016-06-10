@@ -45,7 +45,7 @@ div{
 </style>
 </head>
 <body>
-<%@ include file="../top.jsp" %>
+<%@ include file="../top_prof.jsp" %>
 <%!
 public int getDayValue(String str){
 	if(str.equals("¿ù"))

@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-<%@ include file="../top.jsp" %>
+<%@ include file="../top_prof.jsp" %>
 <%
 //if(session_id == null)
 	//response.sendRedirect("login.jsp");
