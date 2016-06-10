@@ -62,10 +62,8 @@ public int getDayValue(String str){
 }
 %>
 <% 
-//String yearStr = request.getParameter("year");
-//String semesterStr = request.getParameter("semester");
-String yearStr = "2016";
-String semesterStr = "1";
+String yearStr = request.getParameter("year");
+String semesterStr = request.getParameter("semester");
 
 String studentID = "1315842";  //세션 아이디부여
 int year = Integer.parseInt(yearStr);
