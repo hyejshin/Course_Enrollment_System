@@ -113,23 +113,33 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 	int endHr = 14;
 	int y = 0;
 	while(myResultSet.next() != false){
-		String c_id = myResultSet.getString("c_id");
-		String c_id_no = myResultSet.getString("c_id_no");
+		String c_id="", c_id_no="", c_name="", p_id="", t_day="", t_time="", t_room="", p_name="";
+		int c_unit=0;
+		c_id = myResultSet.getString("c_id");
+		c_id_no = myResultSet.getString("c_id_no");
 
 		Statement stmt2 = myConn.createStatement();
 		String mySQL2 = "select * from course where c_id = '" + c_id + "' and c_id_no = '" + c_id_no + "'";
 		ResultSet myResultSet2 = stmt2.executeQuery(mySQL2);
-		myResultSet2.next();
-		String c_name =  myResultSet2.getString("c_name");
-		int c_unit =  myResultSet2.getInt("c_unit");
+		if(myResultSet2.next()){
+			c_name =  myResultSet2.getString("c_name");
+			c_unit =  myResultSet2.getInt("c_unit");
+		}else{
+			%>course table을 불러올 수 없음<%
+			break;
+		}
 		
 		mySQL2 = "select * from teach where c_id='" + c_id + "' and c_id_no = '" + c_id_no + "' and t_year = " + year + " and t_semester = " + semester;
 		myResultSet2 = stmt2.executeQuery(mySQL2);
-		myResultSet2.next();
-		String p_id =  myResultSet2.getString("p_id");
-		String t_day =  myResultSet2.getString("t_day");
-		String t_time =  myResultSet2.getString("t_time");
-		String t_room =  myResultSet2.getString("t_room");
+		if(myResultSet2.next()){
+			p_id =  myResultSet2.getString("p_id");
+			t_day =  myResultSet2.getString("t_day");
+			t_time =  myResultSet2.getString("t_time");
+			t_room =  myResultSet2.getString("t_room");
+		}else{
+			%>teach table을 불러올 수 없음<%
+			break;
+		}
 		
 		int hr = Integer.parseInt(t_time.substring(0, 2));
 		int min = Integer.parseInt(t_time.substring(3, 5));
@@ -144,13 +154,12 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		
 		mySQL2 = "select * from professor where p_id='" + p_id + "'";
 		myResultSet2 = stmt2.executeQuery(mySQL2);
-		myResultSet2.next();
-		String p_name =  myResultSet2.getString("p_name");
-		
-		mySQL2 = "select COUNT(*) from enroll where c_id = '" + c_id + "' and c_id_no = '" + c_id_no + "' and e_year = " + year + " and e_semester = " + semester;
-		myResultSet2 = stmt2.executeQuery(mySQL2);
-		myResultSet2.next();
-		int studentNum = myResultSet2.getInt(1);
+		if(myResultSet2.next()){
+			p_name =  myResultSet2.getString("p_name");
+		}else{
+			%>professor table을 불러올 수 없음<%
+			break;
+		}
 		
 		int len = t_day.length();
 		for(int i=0; i<len; i+=2){
