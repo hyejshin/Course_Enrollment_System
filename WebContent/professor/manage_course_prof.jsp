@@ -26,9 +26,6 @@ button { width: 80px; height: 25px; }
 String yearStr = request.getParameter("year");
 String semesterStr = request.getParameter("semester");
 
-String validYear = "2016";
-String validSemester = "2";
-
 String validCancel = "";
 
 if(validYear.equals(yearStr) && validSemester.equals(semesterStr)){
