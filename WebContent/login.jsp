@@ -134,8 +134,6 @@ body {
   <form class="login-container" method="post" action="login_verify.jsp">
   <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <input type="RADIO" name="access" value="student" checked> 학생&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <input type="RADIO" name="access" value="professor"> 교수</p>
     <p><b>사용자 ID</b><br><input type="text" name="userID"></p>
     <p><b>비 밀 번 호</b><br><input type="password" name="userPassword"></p>
         

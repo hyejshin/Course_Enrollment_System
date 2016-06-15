@@ -12,8 +12,7 @@ table {
 	margin-left: auto;
 	margin-right: auto;
 }
-.margin-top {margin-top: 20px; }
-	
+.margin-top {margin-top: 20px; }	
 .text-align-center { text-align: center; }
 button { width: 80px; height: 25px; }
 </style>
@@ -37,8 +36,10 @@ if(validYear.equals(yearStr) && validSemester.equals(semesterStr)){
 
 int year = Integer.parseInt(yearStr);
 int semester = Integer.parseInt(semesterStr);
+
 int totalEnrolledClass = 0;
 int totalEnrolledUnit = 0;
+
 Connection myConn = null;
 Statement stmt = null;
 String mySQL = null;
@@ -110,7 +111,8 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		}%>
 		
 		<tr><td><%=c_id%></td><td><%=c_name%></td><td><%=c_id_no%></td><td><%=c_major%></td><td><%=c_unit%></td>
-		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td><td><%= studentNum %>/<%= t_max %></td>
+		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td>
+		<td><a target="popup" onclick="window.open('../search/student_list.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>&year=<%=year%>&semester=<%=semester%>','切积格废','width=800,height=400')" style="color:#0174DF;"><%= studentNum %>/<%= t_max %></a></td>
 		<td><a href="./delete.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>"><%=validCancel%></a></td></tr>
 <%}
 %> 
@@ -187,7 +189,8 @@ myResultSet = stmt.executeQuery(mySQL);
 		int studentNum = myResultSet2.getInt(1);%>
 		
 		<tr><td><%=c_id%></td><td><%=c_name%></td><td><%=c_id_no%></td><td><%=c_major%></td><td><%=c_unit%></td>
-		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td><td><%= studentNum %>/<%= t_max %></td>
+		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td>
+		<td><a target="popup" onclick="window.open('../search/student_list.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>','切积格废','width=800,height=400')" style="color:#0174DF;"><%= studentNum %>/<%= t_max %></a></td>
 		<td><a href="./insert.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>"><%=validEnroll%></a></td></tr>
 <%}
 %> 
