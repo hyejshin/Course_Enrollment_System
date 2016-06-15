@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>수강신청</title>
 <style>
-table {
+table {   
 	width: 850px;
 	margin-left: auto;
 	margin-right: auto;
