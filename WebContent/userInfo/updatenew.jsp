@@ -19,7 +19,7 @@ body{
 <%@ include file="../top.jsp" %>
 <%
 if(session_id == null)
-	//response.sendRedirect("login.jsp");
+	response.sendRedirect("/Course_Registeration/login.jsp");
 String studentID = session_id;  //세션 아이디부여
 
 Connection myConn = null;
