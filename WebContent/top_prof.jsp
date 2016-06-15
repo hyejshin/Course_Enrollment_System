@@ -63,7 +63,7 @@ String validSemester = "2";
 <tr>
 <td align="center"><b><%=log%></b></td>
 <td align="center"><b><a href="/Course_Registeration/userInfo/professor_update.jsp">사용자정보조회</a></b></td>
-<td align="center"><b><a href="/Course_Registeration/professor/manage_course_prof.jsp?year=2016&semester=1&type=selectAll&value=''">강좌 관리</a></b></td>
+<td align="center"><b><a href="/Course_Registeration/professor/manage_course_prof.jsp?year=2016&semester=2&type=selectAll&value=''">강좌 관리</a></b></td>
 <td align="center"><b><a href="/Course_Registeration/timeTable/professor_time_table.jsp?year=<%=validYear%>&semester=<%=validSemester%>">시간표</a></b></td>
 <td align="center"><b><a href="/Course_Registeration/search/student_search.jsp?type=selectAll&value=">학생검색</a></b></td>
 </tr>
