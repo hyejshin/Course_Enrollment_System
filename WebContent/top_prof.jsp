@@ -48,7 +48,7 @@ table td:hover {
 	display: block;
 }
 </style>
-
+<jsp:useBean id ="EnrollMgr" class="enrollBean.EnrollMgr"/>
 <%
 String session_id = (String)session.getAttribute("userID");
 String session_name = (String)session.getAttribute("userName");
@@ -56,8 +56,8 @@ String log;
 if (session_id==null) log="<a href='/Course_Registeration/login.jsp'>로그인</a>";
 else log="<a href='/Course_Registeration/logout.jsp'>로그아웃</a>";
 
-String validYear = "2016";
-String validSemester = "2";
+String validYear = Integer.toString(EnrollMgr.getCurrentYear());
+String validSemester = Integer.toString(EnrollMgr.getCurrentSemester());
 %>
 <table width="850px" align="center">
 <tr>

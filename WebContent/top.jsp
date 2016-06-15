@@ -5,9 +5,12 @@ String session_name = (String)session.getAttribute("userName");
 String log;
 if (session_id==null) log="<a href='/Course_Registeration/login.jsp'>로그인</a>";
 else log="<a href='/Course_Registeration/logout.jsp'>로그아웃</a>";
+%>
+<jsp:useBean id ="EnrollMgr" class="enrollBean.EnrollMgr"/>
+<%
+String validYear = Integer.toString(EnrollMgr.getCurrentYear());
+String validSemester = Integer.toString(EnrollMgr.getCurrentSemester());
 
-String validYear = "2016";
-String validSemester = "2";
 %>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/earlyaccess/hanna.css">
 <style type="text/css">
