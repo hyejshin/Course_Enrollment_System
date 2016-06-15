@@ -193,7 +193,7 @@ myResultSet = stmt.executeQuery(mySQL);
 		
 		<tr><td><%=c_id%></td><td><%=c_name%></td><td><%=c_id_no%></td><td><%=c_major%></td><td><%=c_unit%></td>
 		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td>
-		<td><a target="popup" onclick="window.open('../search/student_list.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>','切积格废','width=800,height=400')" style="color:#0174DF;"><%= studentNum %>/<%= t_max %></a></td>
+		<td><a target="popup" onclick="window.open('../search/student_list.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>&year=<%=year%>&semester=<%=semester%>','切积格废','width=800,height=400')" style="color:#0174DF;"><%= studentNum %>/<%= t_max %></a></td>
 		<td><a href="./insert.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>"><%=validEnroll%></a></td></tr>
 <%}
 %> 
