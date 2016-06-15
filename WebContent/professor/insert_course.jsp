@@ -21,8 +21,8 @@ String t_time = request.getParameter("t_time");
 String t_room = new String(request.getParameter("t_room").getBytes("8859_1"), "EUC-KR");
 String t_maxStr = request.getParameter("t_max");
 
-
-String professorID = "cs4590";  //세션 아이디부여
+String session_id = (String)session.getAttribute("userID");
+String professorID = session_id; //세션 아이디부여
 
 int c_id_no = Integer.parseInt(c_id_noStr);
 int t_year = Integer.parseInt(t_yearStr);

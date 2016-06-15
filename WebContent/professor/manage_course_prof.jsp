@@ -35,9 +35,12 @@ if(validYear.equals(yearStr) && validSemester.equals(semesterStr)){
 	validCancel = "강좌삭제";
 }
 
+if(session_id == null)
+	response.sendRedirect("/Course_Registeration/login.jsp");
+
 String searchType = request.getParameter("type");
 String typeValue = new String(request.getParameter("value").getBytes("8859_1"), "EUC-KR");
-String professorID = "cs4590";  //세션 아이디부여
+String professorID = session_id;  //세션 아이디부여
 
 int year = Integer.parseInt(yearStr);  %><%= year %> <%
 int semester = Integer.parseInt(semesterStr);   %><%= semester %> <%

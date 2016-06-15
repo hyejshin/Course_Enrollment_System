@@ -18,7 +18,10 @@ String c_id_no_str = request.getParameter("c_id_no");
 int year = Integer.parseInt(yearStr);
 int semester = Integer.parseInt(semesterStr);
 int c_id_no = Integer.parseInt(c_id_no_str);
-String p_id = "cs4590"; //세션아이디부여
+
+String session_id = (String)session.getAttribute("userID");
+String p_id = session_id; //세션 아이디부여
+
 String result = null;
 
 result = DeleteMgr.deleteTeachlist(p_id, c_id, c_id_no);
