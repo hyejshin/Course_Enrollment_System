@@ -42,8 +42,8 @@ String searchType = request.getParameter("type");
 String typeValue = new String(request.getParameter("value").getBytes("8859_1"), "EUC-KR");
 String professorID = session_id;  //세션 아이디부여
 
-int year = Integer.parseInt(yearStr);  %><%= year %> <%
-int semester = Integer.parseInt(semesterStr);   %><%= semester %> <%
+int year = Integer.parseInt(yearStr);
+int semester = Integer.parseInt(semesterStr);
 
 
 
@@ -61,7 +61,6 @@ Class.forName(dbdriver);
 myConn = DriverManager.getConnection(dburl, user, passwd);
 stmt = myConn.createStatement();
 
-%><%= professorID %> <%
 mySQL = "select * from teach where p_id = '" + professorID + "' and t_year = " + year + " and t_semester = " + semester;
 
 ResultSet myResultSet = stmt.executeQuery(mySQL);
@@ -216,7 +215,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		<input name="value" id="valueInput" size="30">
 	    <button>강의검색</button></form></td></tr>
 </table> 
-searchType: <%=searchType%>, typeValue: <%=typeValue%>
+
 <script>
 	alert(<%=searchType%>); //값이 반영되지 않고 있음
 	document.getElementById("typeValue").value = <%=typeValue%>;
