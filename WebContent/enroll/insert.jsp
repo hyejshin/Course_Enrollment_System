@@ -15,7 +15,8 @@ int c_id_no = Integer.parseInt(request.getParameter("c_id_no"));
 
 int year = Integer.parseInt(yearStr);
 int semester = Integer.parseInt(semesterStr);
-String s_id = "1315842";
+String session_id = (String)session.getAttribute("userID");
+String s_id = session_id;
 String result = null;
 
 Connection myConn = null;

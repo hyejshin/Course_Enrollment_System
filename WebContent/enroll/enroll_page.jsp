@@ -20,11 +20,14 @@ button { width: 80px; height: 25px; }
 <body>
 <%@ include file="../top.jsp" %>
 <% 
+if(session_id == null)
+	response.sendRedirect("/Course_Registeration/login.jsp");
+
 String yearStr = request.getParameter("year");
 String semesterStr = request.getParameter("semester");
 String searchType = request.getParameter("type");
 String typeValue = new String(request.getParameter("value").getBytes("8859_1"), "EUC-KR");
-String studentID = "1315842";  //세션 아이디부여
+String studentID = session_id;
 
 String validEnroll = "";
 String validCancel = "";

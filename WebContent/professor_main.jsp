@@ -4,10 +4,10 @@
 <body>
  <%@ include file="top_prof.jsp" %>
 
-<table width="850px" align="center">
+<table width="850px" align="center" height="100%">
 <% if (session_id!= null) { %>
 <tr>
-<td align="center"><%=session_id%>교수님 방문을 환영합니다.</td>
+<td align="center"><%=session_name%>교수님 방문을 환영합니다.</td>
 </tr>
 <% } else { %>
 <tr>

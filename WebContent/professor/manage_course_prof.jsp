@@ -35,7 +35,7 @@ if(validYear.equals(yearStr) && validSemester.equals(semesterStr)){
 String searchType = request.getParameter("type");
 String typeValue = request.getParameter("value");
 
-String professorID = "cs4590";  //세션 아이디부여
+String professorID = session_id;
 
 int year = Integer.parseInt(yearStr);  %><%= year %> <%
 int semester = Integer.parseInt(semesterStr);   %><%= semester %> <%

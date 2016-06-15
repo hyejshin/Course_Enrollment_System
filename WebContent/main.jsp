@@ -3,10 +3,10 @@
 <title>데이터베이스를활용한수강신청시스템입니다.</title></head>
 <body>
 <%@ include file="top.jsp" %>
-<table width="75%" align="center" height="100%">
+<table width="850px" align="center" height="100%">
 <% if (session_id!= null) { %>
 <tr>
-<td align="center"><%=session_id%>님방문을환영합니다.</td>
+<td align="center"><%=session_name%>님방문을환영합니다.</td>
 </tr>
 <% } else { %>
 <tr>

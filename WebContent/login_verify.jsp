@@ -2,7 +2,6 @@
 <%@ page import="java.sql.*"%>
 
 <%
-String accessor = request.getParameter("access");
 String userID = request.getParameter("userID");
 String userPassword = request.getParameter("userPassword");
 
@@ -20,14 +19,14 @@ myConn = DriverManager.getConnection(dburl, user, passwd);
 stmt = myConn.createStatement();
 
 
-if(accessor.equals("student") && userID.startsWith("1")) {
+if(userID.startsWith("1")) {
 	mySQL = "select s_name from student where s_id='" + userID + "' and s_pwd='" + userPassword + "'";
 	ResultSet  myResultSet = stmt.executeQuery(mySQL);
     if(myResultSet.next() != false){
 
 		String name = myResultSet.getString("s_name");
-		session.setAttribute("user", name);
-		session.setAttribute("userID", name);  
+		session.setAttribute("userName", name);
+		session.setAttribute("userID", userID);  
 		response.sendRedirect("main.jsp");
 	}
     else { %>
@@ -38,14 +37,14 @@ if(accessor.equals("student") && userID.startsWith("1")) {
     <%
     }
 }
-else if(accessor.equals("professor") && userID.startsWith("cs")) {
+else if(userID.startsWith("cs")) {
 	mySQL2 = "select p_name from professor where p_id='" + userID + "' and p_pwd='" + userPassword + "'";
     ResultSet myResultSet2 = stmt.executeQuery(mySQL2);
     if(myResultSet2.next() != false){
 
 		String name = myResultSet2.getString("p_name");
-		session.setAttribute("user", name);
-		session.setAttribute("userID", name);  
+		session.setAttribute("userName", name);
+		session.setAttribute("userID", userID); 
 		response.sendRedirect("professor_main.jsp");
 	}
     

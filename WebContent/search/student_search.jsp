@@ -23,6 +23,9 @@ button { width: 80px; height: 25px; }
 <body>
 <%@ include file="../top_prof.jsp" %>
 <%
+if(session_id == null)
+	response.sendRedirect("/Course_Registeration/login.jsp");
+
 Connection myConn = null;
 Statement stmt = null;
 String mySQL = null;

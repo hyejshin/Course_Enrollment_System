@@ -7,15 +7,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>교수 정보 수정</title>
 <style>
-
+.margin-top {margin-top: 60px; }
 </style>
 </head>
 <body>
 <%@ include file="../top_prof.jsp" %>
 <%
-//if(session_id == null)
-	//response.sendRedirect("login.jsp");
-String professorID = "cs4580";  //세션 아이디부여
+
+if(session_id == null)
+	response.sendRedirect("/Course_Registeration/login.jsp");
+
+String professorID = session_id;
 
 Connection myConn = null;
 Statement stmt = null;
@@ -32,14 +34,8 @@ mySQL = "select * from professor where p_id='" + professorID + "'";;
 ResultSet myResultSet = stmt.executeQuery(mySQL);
 
 %>
-<table >
-<tr> 
-      <td colspan="2" height="39" align="center">
-         
-    </tr>
-    </table>
 <form method="post" action="professor_update_verify.jsp">
-  <table width="600" border="1" cellspacing="0" cellpadding="3"  align="center">
+  <table width="600" border="1" cellspacing="0" cellpadding="3"  align="center"  class="margin-top">
     <tr> 
       <td colspan="2" height="39" align="center">
          <font size="+1" ><b>교수 정보 수정</b></font></td>

@@ -62,10 +62,13 @@ public int getDayValue(String str){
 }
 %>
 <% 
+if(session_id == null)
+	response.sendRedirect("/Course_Registeration/login.jsp");
+
 String yearStr = request.getParameter("year");
 String semesterStr = request.getParameter("semester");
 
-String p_id = "cs4555";  //세션 아이디부여
+String p_id = session_id;
 int year = Integer.parseInt(yearStr);
 int semester = Integer.parseInt(semesterStr);
 
@@ -155,7 +158,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 			int dayPos = 20 + 120*getDayValue(t_day.substring(i, i+1));
 			%><div class="course" style="top:<%=startPos%>px; left:<%=dayPos%>px; height:<%=height%>px; 
 			background-color:<%=color[totalEnrolledClass%8]%>">
-				</br><%=c_name%></br><%=t_room%></br><%=t_time%>
+				<br><%=c_name%><br><%=t_room%><br><%=t_time%>
 			</div><%
 		}
 		totalEnrolledClass += 1;
