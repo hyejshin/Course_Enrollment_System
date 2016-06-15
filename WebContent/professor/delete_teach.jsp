@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>수강신청 입력 Enroll test</title>
+<title>강좌 삭제 Delete</title>
 </head>
 <body>
 <jsp:useBean id ="DeleteMgr" class="deleteTeachBean.DeleteMgr"/>

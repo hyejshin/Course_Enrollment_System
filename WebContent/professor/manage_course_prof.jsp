@@ -94,6 +94,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		String t_time =  myResultSet.getString("t_time");
 		String t_room =  myResultSet.getString("t_room"); 
 		int t_max = myResultSet.getInt("t_max"); 
+		int studentNum = 0;
 		
 		Statement stmt2 = myConn.createStatement();
 		String mySQL2 = "select * from course where c_id = '" + c_id + "' and c_id_no = '" + c_id_no + "'";
@@ -113,12 +114,13 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		
 		mySQL2 = "select COUNT(*) from enroll where c_id = '" + c_id + "' and c_id_no = '" + c_id_no + "' and e_year = " + year + " and e_semester = " + semester;
 		myResultSet2 = stmt2.executeQuery(mySQL2);
-		myResultSet2.next();
-		int studentNum = myResultSet2.getInt(1);   %>
+		if(myResultSet2.next()){
+			studentNum = myResultSet2.getInt(1);
+		}%>
 			
 		<tr><td><%=c_id%></td><td><%=c_name%></td><td><%=c_id_no%></td><td><%=c_major%></td><td><%=c_unit%></td>
-		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td> <!--  <td><%= studentNum %>/<%= t_max %></td>-->
-		<td><a target="popup" onclick="window.open('../search/student_list.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>','학생목록','width=800,height=400')" style="color:#0174DF;"><%= studentNum %>/<%= t_max %></a></td>
+		<td><%=p_name%></td><td><%=t_day%> <%=t_time%></td><td><%=t_room%></td>
+		<td><a target="popup" onclick="window.open('../search/student_list.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>&year=<%=year%>&semester=<%=semester%>','학생목록','width=800,height=400')" style="color:#0174DF;"><%= studentNum %>/<%= t_max %></a></td>
 		<td> <a href="./delete_teach.jsp?year=<%=yearStr%>&semester=<%=semesterStr%>&c_id=<%=c_id%>&c_id_no=<%=c_id_no%>"><%=validCancel%></a></td></tr> 
  
 <%}
@@ -134,7 +136,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 <table border= "1" class="margin-top">
 	<tr><td>
 	강좌개설:<form method="post" action="insert_course.jsp" id="addTeach">
-	 	과목명:	<select name="c_name">
+	 	<select name="c_name">
 	 	
 <%
 	mySQL = "select c_name from course";
@@ -150,7 +152,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		 		<option value="1">1</option>
 				<option value="2">2</option></select>
 		
-		 학년도:<input type=text name="t_year" size="4" value="<%=validYear%>" readOnly/>
+		 학년도:<input type=text name="t_year" size="2" value="<%=validYear%>" readOnly/>
 		학기:<input type=text name="t_semester" size="1" value="<%=validSemester%>" readOnly/>
 		요일:<select name="t_day">
 	 			<option value="월,수">월,수</option>
@@ -158,7 +160,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 				<option value="수,금">수,금</option></select>	
 				
 		시간:<select name="t_time">
-	 			<option value="9:00-10:15">9:00-10:15</option>
+	 			<option value="09:00-10:15">09:00-10:15</option>
 	 			<option value="10:30-11:45">10:30-11:45</option>
 				<option value="12:00-13:15">12:00-13:15</option>
 				<option value="13:30-14:45">13:30-14:45</option>
@@ -178,7 +180,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 				<option value="명신514">명신514</option>
 				<option value="명신516">명신516</option></select>	
 		
-		정원:<input type=text name="t_max" onKeyPress="return digit_check(event)" size="3"/>
+		정원:<input type=text name="t_max" onKeyPress="return digit_check(event)" size="2"/>
 						
 			<input type="submit" value="강좌개설" onclick="return blanck_check()"/> </form>
 		    </td></tr>
