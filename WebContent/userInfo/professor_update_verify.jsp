@@ -54,9 +54,9 @@ String p_major = new String(request.getParameter("p_major").getBytes("8859_1"), 
 }
   catch(SQLException ex) {
      	String sMessage;
-	if(ex.getErrorCode() == 20002)
+	if(ex.getErrorCode() == 20008)
 		sMessage = "암호는 4자리 이상이어야 합니다.";
-	else if(ex.getErrorCode() == 20003)
+	else if(ex.getErrorCode() == 20009)
 		sMessage = "암호에 공란은 입력되지 않습니다.";
 	else
 		sMessage = "잠시 후 다시 시도하십시오" ;

@@ -142,22 +142,27 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 <%
 if(searchType.equals("selectAll")){
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester
-			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
+			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + 
+			"' and e_year = " + year + " and e_semester = " + semester + ")";
 }else if(searchType.equals("p_name")){
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + 
 			" and p_id in (select p_id from professor where p_name = '" + typeValue + "')" 
-			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
+			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + 
+			"' and e_year = " + year + " and e_semester = " + semester + ")";
 } else if(searchType.equals("c_id")){
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + " and c_id = '" + typeValue
-			+ "' and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
+			+ "' and c_id not in (select c_id from enroll where s_id = '" + studentID + 
+			"' and e_year = " + year + " and e_semester = " + semester + ")";
 }else if(searchType.equals("c_name")){
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + 
 			" and c_id in (select c_id from course where c_name LIKE '%" + typeValue + "%')" 
-			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
+			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + 
+			"' and e_year = " + year + " and e_semester = " + semester + ")";
 }else if(searchType.equals("c_major")){
 	mySQL = "select * from teach where t_year = " + year + " and t_semester = " + semester + 
 			" and c_id in (select c_id from course where c_major LIKE '%" + typeValue + "%')" 
-			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + "')";
+			+ " and c_id not in (select c_id from enroll where s_id = '" + studentID + 
+			"' and e_year = " + year + " and e_semester = " + semester + ")";
 }
 myResultSet = stmt.executeQuery(mySQL);
 %>

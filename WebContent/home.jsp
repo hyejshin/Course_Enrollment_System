@@ -421,10 +421,6 @@ img {
 .no_mr {
 	margin-right: 0
 }
-div #intro{
-	font-family: 'hanna';
-	text-align: center;
-}
 </style>
 
 <body>
@@ -438,12 +434,6 @@ div #intro{
 			</div>
 			<%@ include file="top.jsp"%>
 		</div>
-		<div id="intro">
-		<% if (session_id!= null) { %>
-		<%=session_name%>님방문을환영합니다.
-		<% } else { %>
-		로그인한후사용하세요.
-		<%}%></div>
 		<center>
 			<div id="templatemo_main">
 				<div id="content">

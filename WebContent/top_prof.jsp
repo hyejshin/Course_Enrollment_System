@@ -38,13 +38,13 @@ table td a:hover {
 	color: #222;
 	text-decoration: none;
 }
-table td a:active {
+table td #top:active {
 	background: #6bd;
 	color: #222;
 	text-decoration: none;
 }
 
-table td:hover {
+table td #top:hover {
 	display: block;
 }
 </style>
@@ -61,10 +61,10 @@ String validSemester = Integer.toString(EnrollMgr.getCurrentSemester());
 %>
 <table width="850px" align="center">
 <tr>
-<td align="center"><b><%=log%></b></td>
-<td align="center"><b><a href="/Course_Registeration/userInfo/professor_update.jsp">사용자정보조회</a></b></td>
-<td align="center"><b><a href="/Course_Registeration/professor/manage_course_prof.jsp?year=2016&semester=2&type=selectAll&value=''">강좌 관리</a></b></td>
-<td align="center"><b><a href="/Course_Registeration/timeTable/professor_time_table.jsp?year=<%=validYear%>&semester=<%=validSemester%>">시간표</a></b></td>
-<td align="center"><b><a href="/Course_Registeration/search/student_search.jsp?type=selectAll&value=">학생검색</a></b></td>
+<td id="top" align="center"><b><%=log%></b></td>
+<td id="top" align="center"><b><a href="/Course_Registeration/userInfo/professor_update.jsp">사용자정보조회</a></b></td>
+<td id="top" align="center"><b><a href="/Course_Registeration/professor/manage_course_prof.jsp?year=2016&semester=2&type=selectAll&value=''">강좌 관리</a></b></td>
+<td id="top" align="center"><b><a href="/Course_Registeration/timeTable/professor_time_table.jsp?year=<%=validYear%>&semester=<%=validSemester%>">시간표</a></b></td>
+<td id="top" align="center"><b><a href="/Course_Registeration/search/student_search.jsp?type=selectAll&value=">학생검색</a></b></td>
 </tr>
 </table>

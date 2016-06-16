@@ -42,7 +42,7 @@ BEGIN
 	SELECT COUNT(*)
 	INTO nCnt
 	FROM enroll
-	WHERE s_id = sStudentId and c_id = sCourseId;
+	WHERE s_id = sStudentId and c_id = sCourseId and e_year = nYear and e_semester = nSemester ;
 	IF (nCnt > 0) THEN
 		RAISE duplicate_courses;
 	END IF;

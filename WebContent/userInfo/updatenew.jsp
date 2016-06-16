@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>í•™ìƒ ì •ë³´ ìˆ˜ì •</title>
+<title>ÇÐ»ý Á¤º¸ ¼öÁ¤</title>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/earlyaccess/hanna.css">
 
 <style>
@@ -20,7 +20,8 @@ body{
 <%
 if(session_id == null)
 	response.sendRedirect("/Course_Registeration/login.jsp");
-String studentID = session_id;  //ì„¸ì…˜ ì•„ì´ë””ë¶€ì—¬
+
+String studentID = session_id;  //¼¼¼Ç ¾ÆÀÌµðºÎ¿©
 
 Connection myConn = null;
 Statement stmt = null;
@@ -43,15 +44,15 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 
     <tr> 
       <td colspan="2" height="39" align="center">
-         <font size="+1" ><b>í•™&nbsp; ìƒ ì •ë³´ ìˆ˜ì •</b></font></td>
+         <font size="+1" ><b>ÇÐ&nbsp; »ý Á¤º¸ ¼öÁ¤</b></font></td>
     </tr>
      <tr> 
-      <td width="200" align="center"><b>ì•„ì´ë”” í™•ì¸ ì •ë³´</b></td>
+      <td width="200" align="center"><b>¾ÆÀÌµð È®ÀÎ Á¤º¸</b></td>
       <td width="400">&nbsp;</td>
     </tr>  
     <tr> 
-      <td  width="200" align="center"> ì‚¬ìš©ìž ID </td>
-      <td  width="400"><%=studentID%><sup><font size="2" color="red">&nbsp; *ì‚¬ìš©ìž ì•„ì´ë””ëŠ” í•™ë²ˆìœ¼ë¡œ ìˆ˜ì •ë¶ˆê°€</font></sup></td>
+      <td  width="200" align="center"> »ç¿ëÀÚ ID </td>
+      <td  width="400"><%=studentID%><sup><font size="2" color="red">&nbsp; *»ç¿ëÀÚ ¾ÆÀÌµð´Â ÇÐ¹øÀ¸·Î ¼öÁ¤ºÒ°¡</font></sup></td>
     </tr>
 
 	<%
@@ -64,21 +65,21 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 		<input type="hidden" name="s_id"
 						size="15" value="<%=studentID%>">
 		<tr>
-					<td width="200" align="center"> ì´&nbsp;ë¦„</td>
+					<td width="200" align="center"> ÀÌ&nbsp;¸§</td>
 					<td width="400"><input type="text" name="s_name" size="15"
 						value="<%=s_name%>"></td>
 		</tr>
 		     <tr> 
-      <td width="200" align="center"> ë¹„ë°€ë²ˆí˜¸</td>
+      <td width="200" align="center"> ºñ¹Ð¹øÈ£</td>
       <td width="400"><input type="password" name="s_pwd"
 						size="15" value="<%=s_pwd%>"></td>
 				</tr>
 <tr> 
-      <td width="200" align="center"><b>ê°œì¸ì •ë³´</b></td>
+      <td width="200" align="center"><b>°³ÀÎÁ¤º¸</b></td>
       <td width="400">&nbsp;</td>
     </tr>  
 			<tr>
-				<td width="200" align="center">ì£¼ì†Œ</td>
+				<td width="200" align="center">ÁÖ¼Ò</td>
 				<td width="400"><input type="text" name="s_addr" size="50"
 					value="<%=s_addr%>"></td>
 			</tr>
@@ -88,7 +89,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 					value="<%=s_email%>"></td>
 			</tr>
 			<tr>
-				<td width="200" align="center">ì—°ë½ì²˜</td>
+				<td width="200" align="center">¿¬¶ôÃ³</td>
 				<td width="400"><input type="text" name="s_phone" size="50"
 					value="<%=s_phone%>"></td>
 			</tr>
@@ -96,8 +97,8 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 %> 
 			<tr> 
       <td colspan="2" align="center"> 
-       <input type="submit" name="modify" value="ìˆ˜   ì •" >
-       <input type="button" value="ì·¨  ì†Œ" onclick="javascript:window.location='main.jsp'">      
+       <input type="submit" name="modify" value="¼ö   Á¤" >
+       <input type="button" value="Ãë  ¼Ò" onclick="javascript:window.location='main.jsp'">      
       </td>
     </tr>
 </table>

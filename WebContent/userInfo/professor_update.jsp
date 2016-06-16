@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>êµìˆ˜ ì •ë³´ ìˆ˜ì •</title>
+<title>±³¼ö Á¤º¸ ¼öÁ¤</title>
 <style>
 
 </style>
@@ -15,7 +15,7 @@
 <%
 if(session_id == null)
 	response.sendRedirect("/Course_Registeration/login.jsp");
-String professorID = session_id;  //ì„¸ì…˜ ì•„ì´ë””ë¶€ì—¬
+String professorID = session_id;  //¼¼¼Ç ¾ÆÀÌµðºÎ¿©
 
 Connection myConn = null;
 Statement stmt = null;
@@ -38,18 +38,18 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
   <table width="600" border="1" cellspacing="0" cellpadding="3"  align="center">
     <tr> 
       <td colspan="2" height="39" align="center">
-         <font size="+1" ><b>êµìˆ˜ ì •ë³´ ìˆ˜ì •</b></font></td>
+         <font size="+1" ><b>±³¼ö Á¤º¸ ¼öÁ¤</b></font></td>
     </tr>
     <tr>
-      <td colspan="2" align="center">êµìˆ˜ ì •ë³´ ìˆ˜ì • í™”ë©´ìž…ë‹ˆë‹¤:)</td>
+      <td colspan="2" align="center">±³¼ö Á¤º¸ ¼öÁ¤ È­¸éÀÔ´Ï´Ù:)</td>
     </tr>
      <tr> 
-      <td width="200" align="center"><b>ì•„ì´ë”” í™•ì¸</b></td>
+      <td width="200" align="center"><b>¾ÆÀÌµð È®ÀÎ</b></td>
       <td width="400">&nbsp;</td>
     </tr>  
     <tr> 
-      <td  width="200" align="center"> ì‚¬ìš©ìž ID </td>
-      <td  width="400"><%=professorID%><sup><font size="2" color="red">&nbsp; *ì•„ì´ë””ëŠ” êµë²ˆìœ¼ë¡œ ìˆ˜ì •ë¶ˆê°€</font></sup></td>
+      <td  width="200" align="center"> »ç¿ëÀÚ ID </td>
+      <td  width="400"><%=professorID%><sup><font size="2" color="red">&nbsp; *¾ÆÀÌµð´Â ±³¹øÀ¸·Î ¼öÁ¤ºÒ°¡</font></sup></td>
     </tr>
 
 	<%
@@ -67,31 +67,31 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 				<input type="hidden" name="p_id"
 						size="15" value="<%=professorID%>">
 		<tr>
-					<td width="200" align="center">ì´ &nbsp; ë¦„</td>
+					<td width="200" align="center">ÀÌ &nbsp; ¸§</td>
 					<td width="400"><input type="text" name="p_name" size="15"
 						value="<%=p_name%>"></td>
 		</tr>
 		     <tr> 
-      <td width="200" align="center"> ë¹„ë°€ë²ˆí˜¸</td>
+      <td width="200" align="center"> ºñ¹Ð¹øÈ£</td>
       <td width="400"><input type="password" name="p_pwd"
 						size="15" value="<%=p_pwd%>"></td>
 				</tr>
 <tr> 
-      <td width="200" align="center"><b>ê°œì¸ì •ë³´</b></td>
+      <td width="200" align="center"><b>°³ÀÎÁ¤º¸</b></td>
       <td width="400">&nbsp;</td>
     </tr>  
     <tr>
-				<td width="200" align="center">ëŒ€í•™ &nbsp;ì •ë³´</td>
+				<td width="200" align="center">´ëÇÐ &nbsp;Á¤º¸</td>
 				<td width="400"><input type="text" name="p_college" size="50"
 					value="<%=p_college%>"></td>
 			</tr>
 			<tr>
-				<td width="200" align="center">ì „ &nbsp; ê³µ</td>
+				<td width="200" align="center">Àü &nbsp; °ø</td>
 				<td width="400"><input type="text" name="p_major" size="50"
 					value="<%=p_major%>"></td>
 			</tr>
 			<tr>
-				<td width="200" align="center">ì—°&nbsp; êµ¬&nbsp; ì‹¤</td>
+				<td width="200" align="center">¿¬&nbsp; ±¸&nbsp; ½Ç</td>
 				<td width="400"><input type="text" name="p_room" size="50"
 					value="<%=p_room%>"></td>
 			</tr>
@@ -105,8 +105,8 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 %> 
 			<tr> 
       <td colspan="2" align="center"> 
-       <input type="submit" name="modify" value="ìˆ˜   ì •" >
-       <input type="button" value="ì·¨  ì†Œ" onclick="javascript:window.location='main.jsp'">      
+       <input type="submit" name="modify" value="¼ö   Á¤" >
+       <input type="button" value="Ãë  ¼Ò" onclick="javascript:window.location='main.jsp'">      
       </td>
     </tr>
 </table>

@@ -24,6 +24,7 @@ button { width: 80px; height: 25px; }
 div{
 	border: 1px solid;
 	text-align: center;
+	font-family: 'Hanna';
 }
 .schedule {
 	position: relative; 
