@@ -93,7 +93,7 @@ ResultSet myResultSet = stmt.executeQuery(mySQL);
 
 %>
 <table align="center" class="table_style1">
-	<tr><td><form method="post" action="student_time_table.jsp">
+	<tr><td><form method="post" action="professor_time_table.jsp">
 	학년도: <select name="year" id="yearSelect"><option value="2014">2014학년도</option>
 					<option value="2015">2015학년도</option>
 					<option value="2016">2016학년도</option>
