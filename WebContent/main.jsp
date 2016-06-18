@@ -16,20 +16,13 @@
 </head>
 <body>
 	<div id="total">
-		<div id="templatemo_header">
-			<div id="site_title">
-				<h2 id="yoyo">
-					&nbsp;&nbsp;<img src="images/snow.jpg" width="45px" height="45px" />¼÷¸í¿©ÀÚ´ëÇÐ±³
-					¼ö°­½ÅÃ»
-					</h3>
-			</div>
 			<%@ include file="top.jsp"%>
 		</div>
 		<div id="intro">
 		<% if (session_id!= null) { %>
-		<%=session_name%>´Ô¹æ¹®À»È¯¿µÇÕ´Ï´Ù.
+		<%=session_name%>ë‹˜ë°©ë¬¸ì„í™˜ì˜í•©ë‹ˆë‹¤.
 		<% } else { %>
-		·Î±×ÀÎÇÑÈÄ»ç¿ëÇÏ¼¼¿ä.
+		ë¡œê·¸ì¸í•œí›„ì‚¬ìš©í•˜ì„¸ìš”.
 		<%}%></div>
 		<center>
 			<div id="templatemo_main">
@@ -76,7 +69,7 @@
 			</div>
 		</center>
 		<div id="templatemo_footer">
-			Copyright 2072 <a href="http://www.sookmyung.ac.kr">¼÷¸í¿©ÀÚ´ëÇÐ±³</a>
+			Copyright 2072 <a href="http://www.sookmyung.ac.kr">ìˆ™ëª…ì—¬ìžëŒ€í•™êµ</a>
 		</div>
 	</div>
 </body>
