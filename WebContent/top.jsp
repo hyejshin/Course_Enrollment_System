@@ -3,8 +3,8 @@
 String session_id = (String)session.getAttribute("userID");
 String session_name = (String)session.getAttribute("userName");
 String log;
-if (session_id==null) log="<a href='/Course_Registeration/login.jsp'>·Î±×ÀÎ</a>";
-else log="<a href='/Course_Registeration/logout.jsp'>·Î±×¾Æ¿ô</a>";
+if (session_id==null) log="<a href='/Course_Registeration/login.jsp'>ë¡œê·¸ì¸</a>";
+else log="<a href='/Course_Registeration/logout.jsp'>ë¡œê·¸ì•„ì›ƒ</a>";
 
 %>
 <jsp:useBean id ="EnrollMgr" class="enrollBean.EnrollMgr"/>
@@ -58,13 +58,32 @@ table td a #top:active {
 table td #top:hover {
 	display: block;
 }
+
+#templatem {
+	width: 800px;
+	margin: 0 auto;
+	padding: 20px 0;
+	font-family: 'hanna'
+}
+
+h2 #yoyo {
+	font-family: 'hanna';
+}
+
 </style>
+<div id="templatem">
+			
+				<h2 id="yoyo">
+					&nbsp;&nbsp;<img src="/Course_Registeration/images/snow.jpg" width="45px" height="45px" />ìˆ™ëª…ì—¬ìëŒ€í•™êµ
+					ìˆ˜ê°•ì‹ ì²­
+					</h2>
+			</div>
 <table width="850px" align="center">
 <tr>
 <td id ="top" align="center"><b><%=log%></b></td>
-<td id ="top" align="center"><b><a href="/Course_Registeration/userInfo/updatenew.jsp">»ç¿ëÀÚÁ¤º¸Á¶È¸</a></b></td>
-<td id ="top" align="center"><b><a href="/Course_Registeration/enroll/enroll_page.jsp?year=<%=validYear%>&semester=<%=validSemester%>&type=selectAll&value=">¼ö°­½ÅÃ»</a></b></td>
-<td id ="top" align="center"><b><a href="/Course_Registeration/timeTable/student_time_table.jsp?year=<%=validYear%>&semester=<%=validSemester%>">½Ã°£Ç¥</a></b></td>
-<td id ="top" align="center"><b><a href="/Course_Registeration/search/professor_search.jsp?type=selectAll&value=">±³¼ö°Ë»ö</a></b></td>
+<td id ="top" align="center"><b><a href="/Course_Registeration/userInfo/updatenew.jsp">ì‚¬ìš©ìì •ë³´ì¡°íšŒ</a></b></td>
+<td id ="top" align="center"><b><a href="/Course_Registeration/enroll/enroll_page.jsp?year=<%=validYear%>&semester=<%=validSemester%>&type=selectAll&value=">ìˆ˜ê°•ì‹ ì²­</a></b></td>
+<td id ="top" align="center"><b><a href="/Course_Registeration/timeTable/student_time_table.jsp?year=<%=validYear%>&semester=<%=validSemester%>">ì‹œê°„í‘œ</a></b></td>
+<td id ="top" align="center"><b><a href="/Course_Registeration/search/professor_search.jsp?type=selectAll&value=">êµìˆ˜ê²€ìƒ‰</a></b></td>
 </tr>
 </table>
